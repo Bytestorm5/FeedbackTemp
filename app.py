@@ -83,4 +83,4 @@ def feedback():
     return render_template('feedback_form.html', mistakes=(enumerate(mistakes_list)))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=80, host='0.0.0.0')
