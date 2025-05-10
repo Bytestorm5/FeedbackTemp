@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Feedback Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">FeedbackApp</a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="card shadow">
+      <div class="card-body">
+        <h1 class="card-title mb-4">Student Feedback Form</h1>
+        <form method="post" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="student_name" class="form-label">Student Name</label>
+            <input type="text" class="form-control" id="student_name" name="student_name" placeholder="Enter student's name" required>
+            <div class="invalid-feedback">Please enter the student's name.</div>
+          </div>
+          <div class="mb-3">
+            <label for="student_email" class="form-label">Student Email</label>
+            <input type="email" class="form-control" id="student_email" name="student_email" placeholder="Enter student's email" required>
+            <div class="invalid-feedback">Please provide a valid email.</div>
+          </div>
+          <h4 class="mt-4">Mistakes</h4>
+          {% for idx, m in mistakes %}
+          <div class="mb-3 row">
+            <label for="count_{{ idx }}" class="col-sm-8 col-form-label">{{ m.name }} ({{ m.penalty }} pts each)</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" id="count_{{ idx }}" name="count_{{ idx }}" min="0" value="0">
+            </div>
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Bootstrap form validation
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+</body>
+</html>
